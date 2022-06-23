@@ -1,0 +1,106 @@
+{
+  "parser": "@typescript-eslint/parser",
+  "extends": [
+    "airbnb-typescript",
+    "plugin:@typescript-eslint/recommended",
+    "plugin:@typescript-eslint/recommended-requiring-type-checking",
+    "plugin:react-hooks/recommended",
+    "prettier",
+    "prettier/@typescript-eslint",
+    "plugin:jest/recommended",
+    "plugin:jest/style",
+    "plugin:testing-library/react",
+    "plugin:jest-dom/recommended"
+  ],
+  "plugins": [
+    "jest",
+    "jest-dom",
+    "testing-library",
+    "@typescript-eslint",
+    "react",
+    "jsx-a11y",
+    "import",
+    "prettier",
+    "react-hooks",
+    "promise"
+  ],
+  "parserOptions": {
+    "project": "./tsconfig.json",
+    "ecmaVersion": 2020,
+    "sourceType": "module",
+    "ecmaFeatures": {
+      "jsx": true
+    }
+  },
+  "settings": {
+    "react": {
+      "version": "detect"
+    }
+  },
+  "ignorePatterns": [
+    "/*.setup.ts",
+    "/*.config.js",
+    "dist",
+    "**/*.skip-test.*",
+    "**/*.js",
+    "**/*.jsx"
+  ],
+  "rules": {
+    "@typescript-eslint/require-await": "off",
+    "react/prop-types": "off",
+    "import/prefer-default-export": "off",
+    "react/jsx-props-no-spreading": [
+      "error",
+      {
+        "html": "ignore"
+      }
+    ],
+    "react/jsx-wrap-multilines": [
+      "error",
+      {
+        "prop": "ignore"
+      }
+    ],
+    "react/jsx-curly-newline": "off",
+    "@typescript-eslint/naming-convention": [
+      "error",
+      {
+        "selector": "variableLike",
+        "format": ["camelCase", "snake_case", "PascalCase", "UPPER_CASE"]
+      }
+    ],
+    "react/require-default-props": "off",
+    "jsx-a11y/label-has-associated-control": ["error", {
+      "required": {
+        "some": ["nesting", "id"]
+      }
+    }],
+    "jsx-a11y/label-has-for": ["error", {
+      "required": {
+        "some": ["nesting", "id"]
+      }
+    }]
+  },
+  "overrides": [{
+    "files": [
+      "**.{test,spec}.{js,jsx,ts,tsx}",
+      "**/__mocks__/**/*.{js,jsx,ts,tsx}"
+    ],
+    "extends": [
+      "plugin:jest/recommended",
+      "plugin:jest/style",
+      "plugin:testing-library/react",
+      "plugin:jest-dom/recommended"
+    ],
+    "rules": {
+      "jest/lowercase-name": [
+        "error",
+        {
+          "ignoreTopLevelDescribe": true
+        }
+      ],
+      "jest/consistent-test-it": "warn",
+      "@typescript-eslint/unbound-method": ["off"]
+    }
+  }]
+}

@@ -1,0 +1,18 @@
+{
+  "ignorePatterns": [
+    "**/node_modules/**",
+    "**/*.tests.{js,jsx,ts,tsx}",
+    "**/*.test.{js,jsx,ts,tsx}",
+    "**/*.spec.{js,jsx,ts,tsx}",
+    "**/test/**",
+    "**/__tests__/**",
+    "**/*.d.ts",
+    "**/__mock-data__/**",
+    "**/__mocks__/**",
+    "**/setupProxy.js",
+    "**/setupTests.js"
+  ],
+  "ignoreUnimported": [],
+  "ignoreUnused": [],
+  "ignoreUnresolved": []
+}

@@ -1,0 +1,20 @@
+@mixin text-title-md {
+  font-size: 22px;
+  line-height: 30px;
+  letter-spacing: -0.15px;
+}
+
+@mixin text-body {
+  font-size: 16px;
+  line-height: 20px;
+}
+
+@mixin text-subtitle-md {
+  font-size: 13px;
+  line-height: 16px;
+}
+
+@mixin text-subtitle-sm {
+  font-size: 11px;
+  line-height: 12px;
+}
