@@ -11,12 +11,17 @@ type SortOption = "ascending" | "descending";
 
 type Props = {
   posts: Post[];
-  loadMore: () => void;
   currentPage: number;
+  loading: boolean;
+  loadMore: () => void;
 };
 
-export const PostColumn: FC<Props> = ({ posts, loadMore, currentPage }) => {
-  console.log("user column");
+export const PostColumn: FC<Props> = ({
+  posts,
+  loading,
+  currentPage,
+  loadMore,
+}) => {
   const [sort, setSort] = useState<SortOption>("descending");
   // search for visual purpose only
   const [search, setSearch] = useState("");
@@ -60,7 +65,7 @@ export const PostColumn: FC<Props> = ({ posts, loadMore, currentPage }) => {
         </div>
         <div className={css.searchBar}>
           <input
-            data-testid="game-search-text"
+            data-testid="post-search-text"
             type="text"
             className={css.textInput}
             value={search}
@@ -74,21 +79,29 @@ export const PostColumn: FC<Props> = ({ posts, loadMore, currentPage }) => {
       </div>
       <div className={css.columnBody}>
         <div className={css.postList}>
-          {filteredPosts.map((post) => (
-            <div key={post.id} className={css.postItem}>
-              <div className={css.postHeader}>
-                <span className={css.date}>
-                  {post.createdTime.toLocaleString()}
-                </span>
-                <span className={css.author}>{` by ${post.authorName}`}</span>
+          {loading ? (
+            <div className={css.postListLoading}>Loading...</div>
+          ) : (
+            filteredPosts.map((post) => (
+              <div key={post.id} className={css.postItem}>
+                <div className={css.postHeader}>
+                  <span className={css.date}>
+                    {post.createdTime.toLocaleString()}
+                  </span>
+                  <span className={css.author}>{` by ${post.authorName}`}</span>
+                </div>
+                <div className={css.postBody}>
+                  {searchValue
+                    ? highlightText(
+                        post.message,
+                        searchValue,
+                        css.highlightText,
+                      )
+                    : post.message}
+                </div>
               </div>
-              <div className={css.postBody}>
-                {searchValue
-                  ? highlightText(post.message, searchValue, css.highlightText)
-                  : post.message}
-              </div>
-            </div>
-          ))}
+            ))
+          )}
         </div>
         <div className={css.loadMore}>
           <div className={css.pages}>

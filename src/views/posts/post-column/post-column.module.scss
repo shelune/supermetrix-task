@@ -3,6 +3,7 @@
 .columnHeader {
   display: flex;
   justify-content: space-between;
+  margin-bottom: 16px;
 }
 
 .sortBar {
@@ -33,10 +34,6 @@
   max-width: 100%;
   padding: 12px;
   border: 1px solid $gray;
-}
-
-.columnBody {
-  padding-top: 16px;
 }
 
 .postHeader {

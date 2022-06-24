@@ -13,33 +13,31 @@ export type UserData = {
 
 type Props = {
   posts: Post[];
-  users: UserData[];
   currentPage: number;
   activeUser: string;
   error: string;
+  loading: boolean;
   loadMore: () => void;
-  setActiveUser: (userId: string) => void;
 };
 
 export const PostsView: FC<Props> = ({
   posts,
-  users,
   currentPage,
   activeUser,
   error,
+  loading,
   loadMore,
-  setActiveUser,
-}) => {
-  console.log("posts view");
-  return (
+}) => (
+  <>
+    {error && <div className={css.error}>{error}</div>}
     <div className={css.container}>
-      {error && <div className={css.error}>{error}</div>}
-      <UserColumn
-        users={users}
-        activeUser={activeUser}
-        setActiveUser={setActiveUser}
+      <UserColumn posts={posts} activeUser={activeUser} loading={loading} />
+      <PostColumn
+        posts={posts}
+        currentPage={currentPage}
+        loading={loading}
+        loadMore={loadMore}
       />
-      <PostColumn posts={posts} loadMore={loadMore} currentPage={currentPage} />
     </div>
-  );
-};
+  </>
+);

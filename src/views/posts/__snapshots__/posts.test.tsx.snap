@@ -1,0 +1,16 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`PostsView should render 1`] = `
+<div>
+  <div
+    class="container"
+  >
+    <div>
+      User Column
+    </div>
+    <div>
+      Post Column: 100 posts
+    </div>
+  </div>
+</div>
+`;

@@ -1,4 +1,7 @@
-export const mockApiPosts = [
+import { ApiPost } from "../api";
+import { postMapper } from "../utils/mapper";
+
+export const mockApiPosts: ApiPost[] = [
   {
     id: "post62b3d0455dbb0_1a1281e7",
     from_name: "Yolande Urrutia",
@@ -898,3 +901,5 @@ export const mockApiPosts = [
     created_time: "2021-12-15T11:19:33+00:00",
   },
 ];
+
+export const mockPosts = mockApiPosts.map(postMapper);

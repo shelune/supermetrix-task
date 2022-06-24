@@ -8,7 +8,7 @@ import {
   useState,
 } from "react";
 import type { ApiErrorResponse, ApiPostResponse, Post } from "../../shared/api";
-import type { PostsView, UserData } from "./posts";
+import type { PostsView } from "./posts";
 
 import { postMapper } from "../../shared/utils/mapper";
 import { getCookie } from "../../shared/utils/cookie";
@@ -23,38 +23,38 @@ export const useData = (): ComponentProps<typeof PostsView> => {
   const [activeUser, setActiveUser] = useState("");
   const params = useParams();
 
-  useEffect(() => {
-    async function getData() {
-      setLoading(true);
-      try {
-        const response = await axios.get<ApiPostResponse>(
-          "https://api.supermetrics.com/assignment/posts",
-          {
-            params: {
-              sl_token: getCookie("sl_token"),
-              page,
-            },
+  const getData = useCallback(async () => {
+    setLoading(true);
+    try {
+      const response = await axios.get<ApiPostResponse>(
+        "https://api.supermetrics.com/assignment/posts",
+        {
+          params: {
+            sl_token: getCookie("sl_token"),
+            page,
           },
-        );
-        const mapped = response.data.data.posts.map(postMapper);
-        setPosts(mapped);
-        setLoading(false);
-        setError("");
-      } catch (err) {
-        if (axios.isAxiosError(err) && err.response?.data) {
-          const errorResponse = err.response.data as ApiErrorResponse;
-          setError(errorResponse.error.message);
-        } else {
-          // eslint-disable-next-line no-console
-          console.log(err);
-        }
+        },
+      );
+      const mapped = response.data.data.posts.map(postMapper);
+      setPosts(posts.concat(mapped));
+      setError("");
+    } catch (err) {
+      if (axios.isAxiosError(err) && err.response?.data) {
+        const errorResponse = err.response.data as ApiErrorResponse;
+        setError(errorResponse.error.message);
+      } else {
+        // eslint-disable-next-line no-console
+        console.log(err);
       }
     }
-
-    // eslint-disable-next-line @typescript-eslint/no-floating-promises
-    getData();
+    setLoading(false);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [page]);
+
+  useEffect(() => {
+    // eslint-disable-next-line @typescript-eslint/no-floating-promises
+    getData();
+  }, [getData]);
 
   useEffect(() => {
     if (params.userId) {
@@ -63,21 +63,6 @@ export const useData = (): ComponentProps<typeof PostsView> => {
       setActiveUser("");
     }
   }, [params.userId]);
-
-  const users: UserData[] = useMemo(() => {
-    const dupedUsers = posts.map((post) => ({
-      name: post.authorName,
-      userId: post.authorId,
-    }));
-    const filteredUsers = dupedUsers.filter(
-      (user, index, array) =>
-        array.findIndex((match) => match.userId === user.userId) === index,
-    );
-    return filteredUsers.map((user) => ({
-      ...user,
-      postCount: posts.filter((post) => post.authorId === user.userId).length,
-    }));
-  }, [posts]);
 
   const filteredPosts = useMemo(
     () =>
@@ -94,15 +79,16 @@ export const useData = (): ComponentProps<typeof PostsView> => {
       return;
     }
     setPage(page + 1);
-  }, [page]);
+    // eslint-disable-next-line @typescript-eslint/no-floating-promises
+    getData();
+  }, [getData, page]);
 
   return {
     posts: filteredPosts,
-    users,
     currentPage: page,
     activeUser,
     error,
+    loading,
     loadMore,
-    setActiveUser,
   };
 };
