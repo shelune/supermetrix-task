@@ -38,3 +38,14 @@ export type ApiRegisterResponse = {
     sl_token: string;
   };
 };
+
+export type ApiErrorResponse = {
+  meta: {
+    request_id: string;
+  };
+  error: {
+    code: string;
+    description: string | null;
+    message: string;
+  };
+};

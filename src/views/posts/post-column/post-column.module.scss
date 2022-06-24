@@ -1,0 +1,80 @@
+@import "../../../styles/utils/_index.scss";
+
+.columnHeader {
+  display: flex;
+  justify-content: space-between;
+}
+
+.sortBar {
+  display: inline-flex;
+  gap: 8px;
+  align-items: center;
+}
+
+.sortPill {
+  @include text-subtitle-md;
+  @include rounded-8;
+  display: inline-block;
+  padding: 6px;
+  border: 1px solid $gray-border;
+  text-transform: capitalize;
+  cursor: pointer;
+
+  &.isActive {
+    background-color: $orange;
+    color: $white;
+    border: 1px solid transparent;
+  }
+}
+
+.textInput {
+  @include rounded-4;
+  width: 100%;
+  max-width: 100%;
+  padding: 12px;
+  border: 1px solid $gray;
+}
+
+.columnBody {
+  padding-top: 16px;
+}
+
+.postHeader {
+  padding: 8px 16px;
+  border-bottom: 2px solid $gray;
+}
+
+.postBody {
+  padding: 8px 16px;
+}
+
+.postList {
+  max-height: 80vh;
+  overflow: auto;
+}
+
+.postItem {
+  @include rounded-4;
+  background-color: $gray-light;
+  border: 2px solid $gray;
+  margin-bottom: 8px;
+}
+
+.highlightText {
+  background-color: $orange;
+}
+
+.loadMore {
+  text-align: right;
+  margin-top: 16px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.loadMoreButton {
+  background-color: $orange;
+  color: $white;
+  padding: 8px;
+  border: none;
+  @include rounded-4;
+}

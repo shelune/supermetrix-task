@@ -1,0 +1,49 @@
+@import "../../../styles/utils/_index.scss";
+
+.container {
+  position: sticky;
+  top: 16px;
+}
+
+.textInput {
+  @include rounded-4;
+  width: 75%;
+  max-width: 100%;
+  padding: 12px;
+  border: 1px solid $gray;
+}
+
+.userList {
+  margin-top: 16px;
+  max-height: 80vh;
+  overflow: auto;
+}
+
+.userItem {
+  @include rounded-4;
+  display: flex;
+  justify-content: space-between;
+  padding: 16px;
+  background-color: $gray-light;
+  margin-bottom: 8px;
+  cursor: pointer;
+  border: 2px solid transparent;
+  color: inherit;
+  text-decoration: none;
+
+  &.isActive {
+    border-color: $gray;
+  }
+}
+
+.postCount {
+  @include text-subtitle-md;
+  @include rounded-full;
+  width: 24px;
+  height: 24px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background-color: $gray;
+  color: $white;
+}

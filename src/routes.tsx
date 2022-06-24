@@ -1,8 +1,9 @@
-import React, { FC, useState } from "react";
+import React, { FC, useEffect, useState } from "react";
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import { Layout } from "./views/layout/layout";
 import { LoginView } from "./views/login/login";
-import { PostsView } from "./views/posts/posts";
+import { PostsView } from "./views/posts";
+import { getCookie } from "./shared/utils/cookie";
 
 const ProtectedRoute = ({
   authenticated,
@@ -20,20 +21,47 @@ const ProtectedRoute = ({
 export const RoutesProvider: FC = () => {
   const [token, setToken] = useState<string | null>(null);
 
+  useEffect(() => {
+    const tokenCookie = getCookie("sl_token");
+    if (tokenCookie) {
+      setToken(tokenCookie);
+    }
+  }, []);
+
   return (
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<Layout />}>
-          <Route path="/" element={<LoginView setToken={setToken} />} />
           <Route
-            path="/posts/"
+            path="/login"
+            element={
+              <>
+                {token ? (
+                  <Navigate to="/posts" replace />
+                ) : (
+                  <LoginView setToken={setToken} />
+                )}
+              </>
+            }
+          />
+          <Route
+            path="/posts/:userId"
             element={
               <ProtectedRoute authenticated={token !== null}>
                 <PostsView />
               </ProtectedRoute>
             }
           />
-          <Route path="*" element={<Navigate to="/" replace />} />
+          <Route
+            path="/posts"
+            element={
+              <ProtectedRoute authenticated={token !== null}>
+                <PostsView />
+              </ProtectedRoute>
+            }
+          />
+          <Route path="/" element={<Navigate to="/posts" replace />} />
+          <Route path="*" element={<Navigate to="/posts" replace />} />
         </Route>
       </Routes>
     </BrowserRouter>

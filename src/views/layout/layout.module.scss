@@ -1,5 +1,9 @@
-@import "../../styles/utils/index";
+@import "../../styles/utils/_index.scss";
 
 .appWrapper {
   max-width: $breakpoint-desktop;
+  margin: 0 auto;
+  height: 100vh;
+  background-color: $white;
+  overflow: auto;
 }

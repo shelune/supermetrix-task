@@ -1,8 +1,8 @@
 import classNames from "classnames";
-import axios from "axios";
+import axios, { AxiosResponse } from "axios";
 import { useNavigate } from "react-router-dom";
 import React, { FC, useCallback, useState } from "react";
-import { ApiRegisterResponse } from "../../shared/api";
+import { ApiErrorResponse, ApiRegisterResponse } from "../../shared/api";
 import { setCookie } from "../../shared/utils/cookie";
 
 import css from "./login.module.scss";
@@ -16,22 +16,34 @@ export const LoginView: FC<Props> = ({ setToken }) => {
   const [email, setEmail] = useState("");
   const navigate = useNavigate();
   const [isSubmitting, setSubmitting] = useState(false);
+  const [error, setError] = useState("");
 
   const login = useCallback(async () => {
     setSubmitting(true);
-    const response = await axios.post<ApiRegisterResponse>(
-      "https://api.supermetrics.com/assignment/register",
-      {
-        client_id: "ju16a6m81mhid5ue1z3v2g0uh",
-        email,
-        name: username,
-      },
-    );
-    if (response.data.data.sl_token) {
-      setCookie("sl_token", response.data.data.sl_token, 60);
-      setToken(response.data.data.sl_token);
-      navigate("/posts/");
+    try {
+      const response = await axios.post<ApiRegisterResponse>(
+        "https://api.supermetrics.com/assignment/register",
+        {
+          client_id: "ju16a6m81mhid5ue1z3v2g0uh",
+          email,
+          name: username,
+        },
+      );
+      if (response.data.data.sl_token) {
+        setCookie("sl_token", response.data.data.sl_token, 60);
+        setToken(response.data.data.sl_token);
+        navigate("/posts");
+      }
+    } catch (err) {
+      if (axios.isAxiosError(err) && err.response?.data) {
+        const errorResponse = err.response.data as ApiErrorResponse;
+        setError(errorResponse.error.message);
+      } else {
+        // eslint-disable-next-line no-console
+        console.log(err);
+      }
     }
+
     setSubmitting(false);
   }, [email, navigate, setToken, username]);
 
@@ -86,6 +98,7 @@ export const LoginView: FC<Props> = ({ setToken }) => {
               }}
             />
           </div>
+          {error && <div className={css.formError}>{error}</div>}
           <div className={css.formFunctions}>
             <button type="submit" className={css.submitButton}>
               {isSubmitting ? "Submitting" : "Submit"}

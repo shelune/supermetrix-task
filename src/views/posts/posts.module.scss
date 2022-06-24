@@ -1,0 +1,13 @@
+@import "../../styles/utils/_index.scss";
+
+.container {
+  padding: 24px;
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  gap: 16px;
+  align-items: start;
+}
+
+.error {
+  color: $red-error;
+}

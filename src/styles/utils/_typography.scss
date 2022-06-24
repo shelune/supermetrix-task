@@ -18,3 +18,9 @@
   font-size: 11px;
   line-height: 12px;
 }
+
+@mixin text-label {
+  font-size: 11px;
+  line-height: 12px;
+  text-transform: uppercase;
+}

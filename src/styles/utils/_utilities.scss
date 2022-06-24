@@ -39,3 +39,15 @@ $breakpoint-desktop: 1024px;
 @mixin shadow-light {
   box-shadow: 0px 0.5px 0px #eeeeee;
 }
+
+@mixin rounded-4 {
+  border-radius: 4px;
+}
+
+@mixin rounded-8 {
+  border-radius: 8px;
+}
+
+@mixin rounded-full {
+  border-radius: 9999px;
+}

@@ -1,0 +1,81 @@
+@import "../../styles/utils/_index.scss";
+
+.loginPage {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+}
+
+.container {
+  width: 436px;
+  margin: 0 auto;
+  text-align: center;
+  padding: 0 24px;
+
+  @include mobile() {
+    width: 100%;
+  }
+}
+
+.formControl {
+  width: 100%;
+  margin-bottom: 20px;
+  position: relative;
+}
+
+.label {
+  @include text-body;
+  color: $gray;
+  position: absolute;
+  left: 16px;
+  top: 22.5px;
+
+  &.isEditing {
+    @include text-label;
+    top: 14.5px;
+  }
+}
+
+.textInput {
+  @include rounded-4;
+  @include text-body;
+  width: 100%;
+  max-width: 100%;
+  padding: 27.5px 16px 19.5px;
+  border: 1px solid $gray;
+}
+
+.showPassword {
+  cursor: pointer;
+  width: 16px;
+  height: 16px;
+  position: absolute;
+  right: 16px;
+  top: 22.5px;
+  opacity: 0.5;
+
+  &.isActive {
+    opacity: 1;
+  }
+}
+
+.formFunctions {
+  margin-top: 40px;
+}
+
+.submitButton {
+  @include text-body;
+  @include rounded-4;
+  background-color: $orange;
+  color: $white;
+  outline: none;
+  border: none;
+  height: 64px;
+  line-height: 64px;
+  width: 100%;
+}
+
+.formError {
+  color: $red-error;
+}
