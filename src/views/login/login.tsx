@@ -40,7 +40,8 @@ export const LoginView: FC<Props> = ({ setToken }) => {
         setError(errorResponse.error.message);
       } else {
         // eslint-disable-next-line no-console
-        console.log(err);
+        console.log("unknown error when registering", err);
+        setError("unknown error when registering");
       }
     }
 
@@ -98,9 +99,17 @@ export const LoginView: FC<Props> = ({ setToken }) => {
               }}
             />
           </div>
-          {error && <div className={css.formError}>{error}</div>}
+          {error && (
+            <div data-testid="login-error" className={css.formError}>
+              {error}
+            </div>
+          )}
           <div className={css.formFunctions}>
-            <button type="submit" className={css.submitButton}>
+            <button
+              type="submit"
+              className={css.submitButton}
+              data-testid="login-submit"
+            >
               {isSubmitting ? "Submitting" : "Submit"}
             </button>
           </div>

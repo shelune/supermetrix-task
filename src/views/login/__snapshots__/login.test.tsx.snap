@@ -1,0 +1,72 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`LoginView should render 1`] = `
+<div>
+  <div
+    class="loginPage"
+  >
+    <div
+      class="container"
+    >
+      <form
+        class="form"
+      >
+        <div
+          class="formControl"
+        >
+          <label
+            class="label"
+            for="username"
+          >
+            Name
+          </label>
+          <input
+            class="textInput"
+            id="username"
+            name="username"
+            type="text"
+            value=""
+          />
+        </div>
+        <div
+          class="formControl"
+        >
+          <label
+            class="label"
+            for="email"
+          >
+            Email
+          </label>
+          <input
+            class="textInput"
+            id="email"
+            name="email"
+            type="email"
+            value=""
+          />
+        </div>
+        <div
+          class="formFunctions"
+        >
+          <button
+            class="submitButton"
+            data-testid="login-submit"
+            type="submit"
+          >
+            Submit
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`LoginView should render input accordingly if it has value 1`] = `
+<label
+  class="label isEditing"
+  for="email"
+>
+  Email
+</label>
+`;
