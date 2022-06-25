@@ -1,6 +1,6 @@
 # Introduction
 
-A simple post reader application.
+A simple post reader application. Live Demo link: https://supermetrics-task.herokuapp.com/
 
 ## Features
 
@@ -21,17 +21,17 @@ In the project directory, run:
 
 In the project directory, run:
 
-- `npm start`
+- `npm run start`
 
 # Production mode
 
 In the project directory, run:
 
-- `npm build`
-- `npm serve`
+- `npm run build`
+- `npm run serve`
 
 # Tests
 
 In the project directory, run:
 
-- `npm test`
+- `npm run test`
