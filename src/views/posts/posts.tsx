@@ -39,11 +39,7 @@ export const PostsView: FC<Props> = ({
     <>
       {error && <div className={css.error}>{error}</div>}
       <div className={css.container}>
-        <UserColumn
-          posts={filteredPosts}
-          activeUser={activeUser}
-          loading={loading}
-        />
+        <UserColumn posts={posts} activeUser={activeUser} loading={loading} />
         <PostColumn
           posts={filteredPosts}
           currentPage={currentPage}

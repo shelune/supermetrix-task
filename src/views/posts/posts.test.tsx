@@ -26,8 +26,12 @@ describe("PostsView", () => {
         loadMore={jest.fn()}
       />,
     );
-    // eslint-disable-next-line jest-dom/prefer-in-document
-    expect(getAllByTestId("user-item")).toHaveLength(1);
+    expect(getAllByTestId("user-item")).toHaveLength(20);
+    expect(
+      getAllByTestId("user-item").filter((elm) =>
+        elm.classList.contains("isActive"),
+      ),
+    ).toHaveLength(1);
     expect(getAllByTestId("post-item")).toHaveLength(7);
   });
 });
