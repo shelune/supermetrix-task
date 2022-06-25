@@ -1,10 +1,39 @@
-# Getting Started with Create React App
+# Introduction
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+A simple post reader application.
 
-## Available Scripts
+## Features
 
-In the project directory, you can run:
+- Simple login (shows error from backend if invalid credentials)
+- Simple posts list that shows users and posts side-by-side
+- Redirect from post view to login view once token is expired
+- User list can be filtered by typing in the search bar. Supports clicking on an user to filter for posts by that user
+- Post list can be filtered by typing in the search bar. Supports different ordering.
+
+# Installation
+
+In the project directory, run:
+
+- `npm i`
+
+# Development mode
+
+In the project directory, run:
+
+- `npm start`
+
+# Production mode
+
+In the project directory, run:
+
+- `npm build`
+- `npm serve`
+
+# Tests
+
+In the project directory, run:
+
+- `npm test`
 
 ### `npm start`
 

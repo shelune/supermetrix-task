@@ -38,7 +38,7 @@ export const useData = (): ComponentProps<typeof PostsView> => {
         setError(errorResponse.error.message);
       } else {
         // eslint-disable-next-line no-console
-        console.log(err);
+        console.log("unknown error when getting posts", err);
       }
     }
     setLoading(false);
