@@ -1,5 +1,6 @@
 import classNames from "classnames";
 import debounce from "lodash.debounce";
+import format from "date-fns/format";
 import React, { FC, useMemo, useRef, useState } from "react";
 import type { Post } from "../../../shared/api";
 import { highlightText } from "../../../shared/utils/highlightText";
@@ -90,7 +91,7 @@ export const PostColumn: FC<Props> = ({
               >
                 <div className={css.postHeader}>
                   <span className={css.date}>
-                    {post.createdTime.toLocaleString()}
+                    {format(post.createdTime, "Pp")}
                   </span>
                   <span className={css.author}>{` by ${post.authorName}`}</span>
                 </div>
