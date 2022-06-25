@@ -1,12 +1,6 @@
 import { useParams } from "react-router-dom";
 import axios from "axios";
-import {
-  ComponentProps,
-  useCallback,
-  useEffect,
-  useMemo,
-  useState,
-} from "react";
+import { ComponentProps, useCallback, useEffect, useState } from "react";
 import type { ApiErrorResponse, ApiPostResponse, Post } from "../../shared/api";
 import type { PostsView } from "./posts";
 
@@ -54,7 +48,7 @@ export const useData = (): ComponentProps<typeof PostsView> => {
   useEffect(() => {
     // eslint-disable-next-line @typescript-eslint/no-floating-promises
     getData();
-  }, [getData]);
+  }, [getData, page]);
 
   useEffect(() => {
     if (params.userId) {
@@ -64,27 +58,15 @@ export const useData = (): ComponentProps<typeof PostsView> => {
     }
   }, [params.userId]);
 
-  const filteredPosts = useMemo(
-    () =>
-      posts
-        .filter((post) => (activeUser ? post.authorId === activeUser : true))
-        .filter((post) =>
-          params.userId ? post.authorId === params.userId : true,
-        ),
-    [activeUser, params.userId, posts],
-  );
-
   const loadMore = useCallback(() => {
     if (page + 1 > MAX_PAGE) {
       return;
     }
     setPage(page + 1);
-    // eslint-disable-next-line @typescript-eslint/no-floating-promises
-    getData();
-  }, [getData, page]);
+  }, [page]);
 
   return {
-    posts: filteredPosts,
+    posts,
     currentPage: page,
     activeUser,
     error,

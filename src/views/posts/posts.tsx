@@ -1,5 +1,5 @@
-import React, { FC } from "react";
-import { Post } from "../../shared/api";
+import React, { FC, useMemo } from "react";
+import type { Post } from "../../shared/api";
 import { PostColumn } from "./post-column/post-column";
 
 import css from "./posts.module.scss";
@@ -27,17 +27,30 @@ export const PostsView: FC<Props> = ({
   error,
   loading,
   loadMore,
-}) => (
-  <>
-    {error && <div className={css.error}>{error}</div>}
-    <div className={css.container}>
-      <UserColumn posts={posts} activeUser={activeUser} loading={loading} />
-      <PostColumn
-        posts={posts}
-        currentPage={currentPage}
-        loading={loading}
-        loadMore={loadMore}
-      />
-    </div>
-  </>
-);
+}) => {
+  const filteredPosts = useMemo(
+    () =>
+      posts.filter((post) =>
+        activeUser ? post.authorId === activeUser : true,
+      ),
+    [activeUser, posts],
+  );
+  return (
+    <>
+      {error && <div className={css.error}>{error}</div>}
+      <div className={css.container}>
+        <UserColumn
+          posts={filteredPosts}
+          activeUser={activeUser}
+          loading={loading}
+        />
+        <PostColumn
+          posts={filteredPosts}
+          currentPage={currentPage}
+          loading={loading}
+          loadMore={loadMore}
+        />
+      </div>
+    </>
+  );
+};

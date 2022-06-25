@@ -1,8 +1,8 @@
 import classNames from "classnames";
-import axios, { AxiosResponse } from "axios";
+import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import React, { FC, useCallback, useState } from "react";
-import { ApiErrorResponse, ApiRegisterResponse } from "../../shared/api";
+import type { ApiErrorResponse, ApiRegisterResponse } from "../../shared/api";
 import { setCookie } from "../../shared/utils/cookie";
 
 import css from "./login.module.scss";

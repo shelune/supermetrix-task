@@ -1,4 +1,4 @@
-import { ApiPost } from "../api";
+import type { ApiPost } from "../api";
 import { postMapper } from "../utils/mapper";
 
 export const mockApiPosts: ApiPost[] = [

@@ -1,7 +1,7 @@
 import classNames from "classnames";
 import React, { FC, useMemo, useState } from "react";
 import { Link } from "react-router-dom";
-import { Post } from "../../../shared/api";
+import type { Post } from "../../../shared/api";
 import type { UserData } from "../posts";
 
 import css from "./user-column.module.scss";

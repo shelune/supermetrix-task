@@ -1,4 +1,4 @@
-import { Post, ApiPost } from "../api";
+import type { Post, ApiPost } from "../api";
 
 export const postMapper = ({
   id,

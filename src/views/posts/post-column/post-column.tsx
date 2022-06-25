@@ -28,7 +28,7 @@ export const PostColumn: FC<Props> = ({
   // search for highlighting search result
   const [searchValue, setSearchValue] = useState("");
 
-  const { current: debouncedOnChange } = useRef(debounce(setSearchValue, 200));
+  const { current: debouncedOnChange } = useRef(debounce(setSearchValue, 250));
 
   const filteredPosts = useMemo(
     () =>
@@ -83,7 +83,11 @@ export const PostColumn: FC<Props> = ({
             <div className={css.postListLoading}>Loading...</div>
           ) : (
             filteredPosts.map((post) => (
-              <div key={post.id} className={css.postItem}>
+              <div
+                key={post.id}
+                className={css.postItem}
+                data-testid="post-item"
+              >
                 <div className={css.postHeader}>
                   <span className={css.date}>
                     {post.createdTime.toLocaleString()}

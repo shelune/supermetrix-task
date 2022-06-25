@@ -1,36 +1,33 @@
-import axios from "axios";
+import { createMemoryHistory } from "history";
+import * as ReactRouterDom from "react-router-dom";
 import React, { ReactNode } from "react";
-import { act, fireEvent, render } from "@testing-library/react";
+import { render } from "@testing-library/react";
 import { PostsView } from "./posts";
 import { mockPosts } from "../../shared/__mock__/posts";
-import { Post } from "../../shared/api";
 
-jest.mock("./post-column/post-column.tsx", () => ({
-  PostColumn: ({ posts }: { posts: Post[] }) => (
-    // eslint-disable-next-line react/destructuring-assignment
-    <div>{`Post Column: ${posts.length} posts`}</div>
-  ),
-}));
-
-jest.mock("./user-column/user-column.tsx", () => ({
-  UserColumn: () => (
-    // eslint-disable-next-line react/destructuring-assignment
-    <div>User Column</div>
-  ),
-}));
+function renderWithRouter(children: ReactNode) {
+  const history = createMemoryHistory();
+  return render(
+    <ReactRouterDom.Router location={history.location} navigator={history}>
+      {children}
+    </ReactRouterDom.Router>,
+  );
+}
 
 describe("PostsView", () => {
-  it("should render", () => {
-    const { container } = render(
+  it("should factor in activeUser", () => {
+    const { getAllByTestId } = renderWithRouter(
       <PostsView
         posts={mockPosts}
         currentPage={1}
-        activeUser=""
+        activeUser="user_15"
         error=""
         loading={false}
         loadMore={jest.fn()}
       />,
     );
-    expect(container).toMatchSnapshot();
+    // eslint-disable-next-line jest-dom/prefer-in-document
+    expect(getAllByTestId("user-item")).toHaveLength(1);
+    expect(getAllByTestId("post-item")).toHaveLength(7);
   });
 });
