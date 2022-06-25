@@ -20,13 +20,19 @@ const ProtectedRoute = ({
 
 export const RoutesProvider: FC = () => {
   const [token, setToken] = useState<string | null>(null);
+  const [ready, setReady] = useState(false);
 
   useEffect(() => {
     const tokenCookie = getCookie("sl_token");
     if (tokenCookie) {
       setToken(tokenCookie);
     }
+    setReady(true);
   }, []);
+
+  if (!ready) {
+    return <div>Loading application...</div>;
+  }
 
   return (
     <BrowserRouter>
