@@ -4,6 +4,11 @@
   display: flex;
   justify-content: space-between;
   margin-bottom: 16px;
+
+  @include mobile() {
+    flex-flow: column-reverse;
+    gap: 8px;
+  }
 }
 
 .sortBar {
